@@ -1,29 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   PhoneBook.hpp                                      :+:      :+:    :+:   */
+/*   utils.hpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ekeller-@student.42sp.org.br <ekeller-@    +#+  +:+       +#+        */
+/*   By: elianmik <elianmik@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/10/30 11:14:15 by ekeller-          #+#    #+#             */
-/*   Updated: 2025/11/03 16:41:12 by ekeller-@st      ###   ########.fr       */
+/*   Created: 2025/07/01 13:55:53 by elianmik          #+#    #+#             */
+/*   Updated: 2025/07/01 14:18:58 by elianmik         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PHONEBOOK_HPP
-# define PHONEBOOK_HPP
+#ifndef UTILS_HPP
+#define UTILS_HPP
 
-# include "Contact.hpp"
-# include <iostream>
+#include <string>
 
-class PhoneBook {
-    private:
-    Contact contacts[8];
-    
-    public:
-    PhoneBook(void);
-    ~PhoneBook(void);
-    
-};
+bool isAlphaString( const std::string& str );
+bool isNumericString( const std::string& str );
 
 #endif
