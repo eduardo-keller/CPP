@@ -6,7 +6,7 @@
 /*   By: ekeller-@student.42sp.org.br <ekeller-@    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/30 11:14:15 by ekeller-          #+#    #+#             */
-/*   Updated: 2025/11/03 16:41:12 by ekeller-@st      ###   ########.fr       */
+/*   Updated: 2025/11/04 17:12:34 by ekeller-@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,13 @@
 
 class PhoneBook {
     private:
-    Contact contacts[8];
+    Contact _contacts[8];
+    int _contactCount;
+    int _index;
     
     public:
     PhoneBook(void);
-    ~PhoneBook(void);
+    int getIndex();
     
 };
 

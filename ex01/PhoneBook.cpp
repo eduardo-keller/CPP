@@ -1,23 +1,20 @@
-/******************************************************************************/
+/* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   PhoneBook.cpp                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ekeller- <ekeller-@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: ekeller-@student.42sp.org.br <ekeller-@    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/30 11:25:24 by ekeller-          #+#    #+#             */
-/*   Updated: 2025/10/30 12:31:21 by ekeller-         ###   ########.fr       */
+/*   Updated: 2025/11/04 17:12:25 by ekeller-@st      ###   ########.fr       */
 /*                                                                            */
-/******************************************************************************/
+/* ************************************************************************** */
 
 #include "PhoneBook.hpp"
 
-PhoneBook::PhoneBook() {
-    std::cout << "Phonebook constructor called" << std::endl;
-    return;
-}
+PhoneBook::PhoneBook() : _contactCount(0), _index(0) {}
 
-PhoneBook::~PhoneBook() {
-    std::cout << "Phonebook destructor called" << std::endl;
-    return;
+
+int PhoneBook::getIndex() {
+    return (this->_index);
 }

@@ -6,7 +6,7 @@
 /*   By: ekeller-@student.42sp.org.br <ekeller-@    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/30 12:23:54 by ekeller-          #+#    #+#             */
-/*   Updated: 2025/11/03 16:51:12 by ekeller-@st      ###   ########.fr       */
+/*   Updated: 2025/11/04 16:31:17 by ekeller-@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,15 +19,13 @@
 class Contact {
 
     private:
-    std::string firstName;
-    std::string lastName;
-    std::string nickame;
-    std::string phoneNumber;
-    std::string secret;
+    std::string _firstName;
+    std::string _lastName;
+    std::string _nickame;
+    std::string _phoneNumber;
+    std::string _secret;
     
     public:
-    Contact();
-    ~Contact();
 
 
 };
