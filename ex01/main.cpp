@@ -6,7 +6,7 @@
 /*   By: ekeller-@student.42sp.org.br <ekeller-@    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/30 11:21:43 by ekeller-          #+#    #+#             */
-/*   Updated: 2025/11/04 17:24:34 by ekeller-@st      ###   ########.fr       */
+/*   Updated: 2025/11/05 18:07:26 by ekeller-@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,19 @@ int main(void) {
         //std::cout << command << std::endl;
         //std::cout << phonebook.getIndex() << std::endl;
         if(command == "ADD")
-            std::cout << command << std::endl;
-        else if(command == "SEARCH")
-            std::cout << command << std::endl;
+            phonebook.addContact();
+        else if(command == "SEARCH"){
+            phonebook.displayContacts();
+            std::cout << "Provide contact index: ";
+            std::string indexStr;
+            std::getline( std::cin, indexStr );            
+        }
+            
         else if(command == "EXIT")
             return 0;
-        continue;
+        else
+            std::cout << "Unknown command." << std::endl;
     }
     
 }
+
