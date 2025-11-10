@@ -1,14 +1,14 @@
-/* ************************************************************************** */
+/******************************************************************************/
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   PhoneBook.cpp                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ekeller-@student.42sp.org.br <ekeller-@    +#+  +:+       +#+        */
+/*   By: ekeller- <ekeller-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/30 11:25:24 by ekeller-          #+#    #+#             */
-/*   Updated: 2025/11/05 18:03:30 by ekeller-@st      ###   ########.fr       */
+/*   Updated: 2025/11/10 15:09:10 by ekeller-         ###   ########.fr       */
 /*                                                                            */
-/* ************************************************************************** */
+/******************************************************************************/
 
 #include "PhoneBook.hpp"
 
@@ -83,6 +83,18 @@ void PhoneBook::displayContacts() const
     std::cout << "---------------------------------------------" << std::endl;
 }
 
+void PhoneBook::displayContactDetails(int i) const {
+    if (i < 0 || i >= _contactCount) {
+        std::cout << "Invalid index" << std::endl;
+        return ;
+    }
+    std::cout << "First name: " << _contacts[i].getFirstName() << std::endl;
+    std::cout << "Last name: " << _contacts[i].getLastName() << std::endl;
+    std::cout << "Nickname: " << _contacts[i].getNickname() << std::endl;
+    std::cout << "Phone number: " << _contacts[i].getPhoneNumber() << std::endl;
+    std::cout << "Darkest secret: " << _contacts[i].getDarkestSecret() << std::endl;
+}
+
 
 bool PhoneBook::isAlphaString( const std::string &str)
 {
@@ -104,9 +116,4 @@ bool PhoneBook::isNumericString( const std::string &str)
             return false;
     }
     return true;
-}
-
-
-int PhoneBook::getIndex() {
-    return (this->_index);
 }

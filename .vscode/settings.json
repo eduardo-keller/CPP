@@ -27,6 +27,25 @@
 		"streambuf": "cpp",
 		"string_view": "cpp",
 		"system_error": "cpp",
-		"typeinfo": "cpp"
+		"typeinfo": "cpp",
+		"array": "cpp",
+		"atomic": "cpp",
+		"bit": "cpp",
+		"cstdarg": "cpp",
+		"cstddef": "cpp",
+		"ctime": "cpp",
+		"deque": "cpp",
+		"unordered_map": "cpp",
+		"vector": "cpp",
+		"functional": "cpp",
+		"iterator": "cpp",
+		"memory": "cpp",
+		"numeric": "cpp",
+		"optional": "cpp",
+		"random": "cpp",
+		"tuple": "cpp",
+		"utility": "cpp",
+		"iomanip": "cpp",
+		"sstream": "cpp"
 	}
 }

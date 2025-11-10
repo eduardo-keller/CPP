@@ -1,14 +1,14 @@
-/* ************************************************************************** */
+/******************************************************************************/
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   PhoneBook.hpp                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ekeller-@student.42sp.org.br <ekeller-@    +#+  +:+       +#+        */
+/*   By: ekeller- <ekeller-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/30 11:14:15 by ekeller-          #+#    #+#             */
-/*   Updated: 2025/11/05 17:53:00 by ekeller-@st      ###   ########.fr       */
+/*   Updated: 2025/11/10 15:06:12 by ekeller-         ###   ########.fr       */
 /*                                                                            */
-/* ************************************************************************** */
+/******************************************************************************/
 
 #ifndef PHONEBOOK_HPP
 # define PHONEBOOK_HPP
@@ -28,10 +28,7 @@ class PhoneBook {
     PhoneBook();
     void addContact();
     void displayContacts() const;
-
-    
-    int getIndex();
-    
+    void displayContactDetails(int i) const;
 };
 
 #endif
