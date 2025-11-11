@@ -6,12 +6,15 @@
 /*   By: ekeller- <ekeller-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/30 11:21:43 by ekeller-          #+#    #+#             */
-/*   Updated: 2025/11/10 15:05:20 by ekeller-         ###   ########.fr       */
+/*   Updated: 2025/11/11 11:42:52 by ekeller-         ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
 #include "PhoneBook.hpp"
 #include "Contact.hpp"
+#include <sstream> // std::istringstream
+#include <iostream> // std::cout, std::cin
+#include <string> // std::string
 
 int main(void) {
     
@@ -21,8 +24,6 @@ int main(void) {
     while(1) {
         std::cout << "Enter command (ADD, SEARCH or EXIT): ";
         std::getline(std::cin, command);
-        //std::cout << command << std::endl;
-        //std::cout << phonebook.getIndex() << std::endl;
         if(command == "ADD")
             phonebook.addContact();
         else if(command == "SEARCH"){

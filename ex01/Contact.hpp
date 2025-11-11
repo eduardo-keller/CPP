@@ -1,22 +1,23 @@
-/* ************************************************************************** */
+/******************************************************************************/
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   Contact.hpp                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ekeller-@student.42sp.org.br <ekeller-@    +#+  +:+       +#+        */
+/*   By: ekeller- <ekeller-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/30 12:23:54 by ekeller-          #+#    #+#             */
-/*   Updated: 2025/11/05 17:25:54 by ekeller-@st      ###   ########.fr       */
+/*   Updated: 2025/11/11 12:14:12 by ekeller-         ###   ########.fr       */
 /*                                                                            */
-/* ************************************************************************** */
+/******************************************************************************/
 
 #ifndef CONTACT_HPP
 # define CONTACT_HPP
 
-# include <iostream>
 # include <string>
-# include <iomanip>
 
+//notice that I did not use a constructor here. in this case the compiler declare a default
+//constructor. in this case this is fine because the private strings will be populate with
+//empty values and later populated with setContact. This is probably not the best practice.
 class Contact {
 
     private:
@@ -33,7 +34,7 @@ class Contact {
         std::string getLastName() const;
         std::string getNickname() const;
         std::string getPhoneNumber() const;
-        std::string getDarkestSecret() const;
+        std::string getDarkSecret() const;
 
 };
 

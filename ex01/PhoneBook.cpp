@@ -6,17 +6,21 @@
 /*   By: ekeller- <ekeller-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/30 11:25:24 by ekeller-          #+#    #+#             */
-/*   Updated: 2025/11/10 15:09:10 by ekeller-         ###   ########.fr       */
+/*   Updated: 2025/11/11 12:32:25 by ekeller-         ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
 #include "PhoneBook.hpp"
+#include <iostream> // (declares std::cin)
+#include <iomanip>  // std::setw
+#include <string> // (declares the std::getline overload for std::string, because
+// firstname is a string, for example)
 
 PhoneBook::PhoneBook() : _contactCount(0), _index(0) {}
 
 void PhoneBook::addContact(){
 	std::string firstName, lastName, nickname, phoneNumber, darkSecret;
-	
+    
 	std::cout << "first name: ";
 	std::getline(std::cin, firstName);
 	std::cout << "lastname: ";
@@ -92,7 +96,7 @@ void PhoneBook::displayContactDetails(int i) const {
     std::cout << "Last name: " << _contacts[i].getLastName() << std::endl;
     std::cout << "Nickname: " << _contacts[i].getNickname() << std::endl;
     std::cout << "Phone number: " << _contacts[i].getPhoneNumber() << std::endl;
-    std::cout << "Darkest secret: " << _contacts[i].getDarkestSecret() << std::endl;
+    std::cout << "Darkest secret: " << _contacts[i].getDarkSecret() << std::endl;
 }
 
 

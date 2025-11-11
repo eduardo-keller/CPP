@@ -6,7 +6,7 @@
 /*   By: ekeller- <ekeller-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/30 11:14:15 by ekeller-          #+#    #+#             */
-/*   Updated: 2025/11/10 18:35:21 by ekeller-         ###   ########.fr       */
+/*   Updated: 2025/11/11 11:37:30 by ekeller-         ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -14,9 +14,7 @@
 # define PHONEBOOK_HPP
 
 # include "Contact.hpp"
-# include <iostream>
 # include <string>
-# include <iomanip>
 
 class PhoneBook {
     private:
