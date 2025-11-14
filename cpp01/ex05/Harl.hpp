@@ -1,34 +1,34 @@
 /******************************************************************************/
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   HumanB.hpp                                         :+:      :+:    :+:   */
+/*   Harl.hpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ekeller- <ekeller-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/13 12:54:36 by ekeller-          #+#    #+#             */
-/*   Updated: 2025/11/13 16:00:53 by ekeller-         ###   ########.fr       */
+/*   Created: 2025/11/13 18:19:34 by ekeller-          #+#    #+#             */
+/*   Updated: 2025/11/14 16:13:26 by ekeller-         ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
-#ifndef HUMANB_HPP
-# define HUMANB_HPP
+#ifndef HARL_HPP
+# define HARL_HPP
 
-# include "Weapon.hpp"
 # include <string>
 
-class HumanB{
+class Harl{
     private:
-    std::string _name;
-    //humanB does not carry a weapon at construction, so we can set
-    // weapon to null at construction to mimic this behaviour. this
-    //is not possible in a reference. 
-    Weapon *_weapon;
+    void debug( void );
+    void info( void );
+    void warning( void );
+    void error( void );
+    void (Harl::*f[4])();
+    std::string level[4];
+    
 
     public:
-    HumanB(std::string setName);
-    ~HumanB();
-    void attack() const;
-    void setWeapon(Weapon &weapon);
+    Harl();
+    void complain( std::string level );
+
 };
 
 #endif
