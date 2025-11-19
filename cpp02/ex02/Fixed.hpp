@@ -6,7 +6,7 @@
 /*   By: ekeller-@student.42sp.org.br <ekeller-@    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/18 11:28:00 by ekeller-@st       #+#    #+#             */
-/*   Updated: 2025/11/19 13:05:35 by ekeller-@st      ###   ########.fr       */
+/*   Updated: 2025/11/19 15:52:54 by ekeller-@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,9 @@ class Fixed {
 
 	public:
 	Fixed();
-	//initializes a new object with an existing one
 	Fixed(const Fixed& copy);
 	Fixed(const int value);
 	Fixed(const float value);
-	//replaces the state of an existing object with another object
 	Fixed& operator=(const Fixed& obj);
 	~Fixed();
 	
@@ -37,14 +35,31 @@ class Fixed {
 	int getRawBits() const;
 	void setRawBits(int const raw);
 	
+	//new from ex02
+	bool operator>(const Fixed& other) const;
+	bool operator<(const Fixed& other) const;
+	bool operator>=(const Fixed& other) const;
+	bool operator<=(const Fixed& other) const;
+	bool operator==(const Fixed& other) const;
+	bool operator!=(const Fixed& other) const;	
+	Fixed operator+(const Fixed& other) const;
+	Fixed operator-(const Fixed& other) const;
+	Fixed operator*(const Fixed& other) const;
+	Fixed operator/(const Fixed& other) const;	
+	Fixed& operator++();
+	Fixed operator++(int);
+	Fixed& operator--();
+	Fixed operator--(int);	
+	static Fixed& min(Fixed& a, Fixed& b);
+	static const Fixed& min(const Fixed& a, const Fixed& b);
+	static Fixed& max(Fixed& a, Fixed& b);
+	static const Fixed& max(const Fixed& a, const Fixed& b);
+	
+	
+	
 };
 
-//first parameter is where you want to send(ex: cout). 
-//returns std::ostream& to allow chaining (std::cout << a << " " << b)
-//allows you to print the float representation of fixed point 
-//without calling obj.tofloat()
-//given subject example it cannot be a member function, otherwise 
-//the calling would need to be a.operator<<(std::cout)
+
 std::ostream& operator<<(std::ostream& out, const Fixed& obj);
 
 

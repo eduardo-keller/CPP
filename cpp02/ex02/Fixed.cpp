@@ -6,7 +6,7 @@
 /*   By: ekeller-@student.42sp.org.br <ekeller-@    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/18 11:27:57 by ekeller-@st       #+#    #+#             */
-/*   Updated: 2025/11/19 13:14:38 by ekeller-@st      ###   ########.fr       */
+/*   Updated: 2025/11/19 15:31:49 by ekeller-@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,9 +71,84 @@ float Fixed::toFloat( void ) const {
 	return static_cast<float>(_intFixedPoint) / (1 << _fractional);
 }
 
-//allows you to print the float representation of fixed point 
-//without calling obj.tofloat()
+
 std::ostream& operator<<(std::ostream& out, const Fixed& obj) {
 	out <<  obj.toFloat();
 	return out;
+}
+
+
+bool Fixed::operator>(const Fixed& other) const { return _intFixedPoint > other._intFixedPoint; }
+bool Fixed::operator<(const Fixed& other) const { return _intFixedPoint < other._intFixedPoint; }
+bool Fixed::operator>=(const Fixed& other) const { return _intFixedPoint >= other._intFixedPoint; }
+bool Fixed::operator<=(const Fixed& other) const { return _intFixedPoint <= other._intFixedPoint; }
+bool Fixed::operator==(const Fixed& other) const { return _intFixedPoint == other._intFixedPoint; }
+bool Fixed::operator!=(const Fixed& other) const { return _intFixedPoint != other._intFixedPoint; }
+
+
+Fixed Fixed::operator+(const Fixed& other) const 
+{
+    return Fixed(this->toFloat() + other.toFloat());
+}
+Fixed Fixed::operator-(const Fixed& other) const 
+{
+    return Fixed(this->toFloat() - other.toFloat());
+}
+Fixed Fixed::operator*(const Fixed& other) const 
+{
+    return Fixed(this->toFloat() * other.toFloat());
+}
+Fixed Fixed::operator/(const Fixed& other) const 
+{
+    if (other.getRawBits() == 0)
+	{
+		std::cout << "NOOOOOOOOOOOOOOOOOOO!!!!!!!!!!!!!!!!!" << std::endl;
+		return Fixed();
+	}
+	return Fixed(this->toFloat() / other.toFloat());
+}
+
+//pré increment. x=5; a = ++x; a=6
+Fixed& Fixed::operator++()
+{
+	_intFixedPoint++;
+	return *this;
+}
+
+//pós increment. x=5; a = x++; a=5
+Fixed Fixed::operator++(int)
+{
+	Fixed temp(*this);
+	_intFixedPoint++;
+	return temp;
+}
+
+Fixed& Fixed::operator--()
+{
+	_intFixedPoint--;
+	return *this;
+}
+
+Fixed Fixed::operator--(int)
+{
+	Fixed temp(*this);
+	_intFixedPoint--;
+	return temp;
+}
+
+Fixed& Fixed::min(Fixed& a, Fixed& b)
+{
+	return (a < b) ? a : b;
+}
+const Fixed& Fixed::min(const Fixed& a, const Fixed& b)
+{
+	return (a < b) ? a : b;
+}
+Fixed& Fixed::max(Fixed& a, Fixed& b)
+{
+	return (a > b) ? a : b;
+}
+const Fixed& Fixed::max(const Fixed& a, const Fixed& b)
+{
+	return (a > b) ? a : b;
 }
