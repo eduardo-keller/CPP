@@ -1,32 +1,35 @@
 /******************************************************************************/
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Animal.hpp                                         :+:      :+:    :+:   */
+/*   Cat.hpp                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ekeller- <ekeller-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/25 12:16:56 by ekeller-          #+#    #+#             */
-/*   Updated: 2025/11/26 12:43:59 by ekeller-         ###   ########.fr       */
+/*   Created: 2025/11/25 16:55:16 by ekeller-          #+#    #+#             */
+/*   Updated: 2025/11/26 14:56:02 by ekeller-         ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
-#ifndef ANIMAL_HPP
-# define ANIMAL_HPP
+#ifndef CAT_HPP
+# define CAT_HPP
 
 # include <string>
+# include "Animal.hpp"
+# include "Brain.hpp"
 
-class Animal{
-  protected:
-  std::string type;
+class Cat: public Animal{
+  private:
+  Brain* _brain;
   
   public:
-  Animal();
-  Animal(const Animal& obj);
-  Animal& operator=(const Animal& obj);
-  virtual ~Animal();
+  Cat();
+  Cat(const Cat& obj);
+  Cat& operator=(const Cat& obj);
+  ~Cat();
 
+  //virtual is optinal here. if the function in base class is virtual 
+  //the function of the derived class will alsobe virtual.
   virtual void makeSound() const;
-  const std::string& getType() const;
 };
 
 #endif
