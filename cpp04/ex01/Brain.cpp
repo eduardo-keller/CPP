@@ -1,14 +1,14 @@
-/******************************************************************************/
+/* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   Brain.cpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ekeller- <ekeller-@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: ekeller-@student.42sp.org.br <ekeller-@    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/26 14:44:32 by ekeller-          #+#    #+#             */
-/*   Updated: 2025/11/26 17:23:17 by ekeller-         ###   ########.fr       */
+/*   Updated: 2025/11/27 18:37:58 by ekeller-@st      ###   ########.fr       */
 /*                                                                            */
-/******************************************************************************/
+/* ************************************************************************** */
 
 #include "Brain.hpp"
 #include <string>
@@ -29,14 +29,16 @@ Brain::Brain(const Brain& obj) {
 }
 
 Brain& Brain::operator=(const Brain& obj){
-    if(this != &obj)
-        Brain::operator=(obj);
+    if (this != &obj) {
+        for (int i = 0; i < 100; ++i)
+            ideas[i] = obj.ideas[i];
+    }
     return *this;
 }
 
-
 const std::string& Brain::getIdeas(int index) const {
+    static const std::string empty = "";
     if(index < 0 || index >= 100)
-        return NULL;
+        return empty;
     return ideas[index];
 }
