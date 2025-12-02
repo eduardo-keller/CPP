@@ -6,7 +6,7 @@
 /*   By: ekeller-@student.42sp.org.br <ekeller-@    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/28 14:58:33 by ekeller-@st       #+#    #+#             */
-/*   Updated: 2025/12/01 18:11:41 by ekeller-@st      ###   ########.fr       */
+/*   Updated: 2025/12/02 17:10:02 by ekeller-@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ const std::string& Bureaucrat::getName() const{
 	return _name;
 }
 
-const int Bureaucrat::getGrade() const{
+int Bureaucrat::getGrade() const{
 	return _grade;
 }
 
@@ -77,9 +77,9 @@ std::ostream& operator<<(std::ostream& out, const Bureaucrat& obj){
 //throw() specifies which exceptions it can throw. if its empty like in this case,
 //it shows the method/function does not throws execeptions.
 const char* Bureaucrat::GradeTooHighException::what() const throw() {
-	return ("Grade should be between 1 and 150");
+	return ("Grade is too High!");
 }
 
 const char* Bureaucrat::GradeTooLowException::what() const throw() {
-	return ("Grade should be between 1 and 150");
+	return ("Grade is too low!");
 }

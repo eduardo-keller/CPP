@@ -6,7 +6,7 @@
 /*   By: ekeller-@student.42sp.org.br <ekeller-@    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/28 13:38:16 by ekeller-@st       #+#    #+#             */
-/*   Updated: 2025/12/01 18:02:11 by ekeller-@st      ###   ########.fr       */
+/*   Updated: 2025/12/02 12:06:17 by ekeller-@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,16 +60,21 @@ void testInvalidIncrementandDecrement() {
 	std::cout << "\nTEST INVALID INCREMENT AND DECREMENT:\n";
 	try{
 		Bureaucrat valid1("valid1", 1);
-		Bureaucrat valid150("valid1150", 150);
 		std::cout << valid1;
-		std::cout << valid150;
 		valid1.incrementGrade();
-		valid150.decrementGrade();
-
 	}
 	catch(std::exception& e){
 		std::cerr << "exception caught: " << e.what() << '\n';
 	}
+	try{
+		Bureaucrat valid150("valid150", 150);
+		std::cout << valid150;
+		valid150.decrementGrade();
+	}
+	catch(std::exception& e){
+		std::cerr << "exception caught: " << e.what() << '\n';
+	}
+	
 }
 
 void testCopyAndAssignment(void) {

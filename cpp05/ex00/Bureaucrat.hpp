@@ -6,7 +6,7 @@
 /*   By: ekeller-@student.42sp.org.br <ekeller-@    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/28 13:04:40 by ekeller-@st       #+#    #+#             */
-/*   Updated: 2025/12/01 18:03:00 by ekeller-@st      ###   ########.fr       */
+/*   Updated: 2025/12/02 17:11:08 by ekeller-@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ public:
 	const std::string& getName() const;
 	// //for primitive types such as int is better to return
 	// //a copy(by value). not a reference. is more efficient.
-	const int		getGrade() const;
+	int				getGrade() const;
 	void			incrementGrade();
 	void			decrementGrade();
 	void			setGrade(int grade);

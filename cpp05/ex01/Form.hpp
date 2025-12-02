@@ -1,41 +1,43 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Bureaucrat.hpp                                     :+:      :+:    :+:   */
+/*   Form.hpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ekeller-@student.42sp.org.br <ekeller-@    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/28 13:04:40 by ekeller-@st       #+#    #+#             */
-/*   Updated: 2025/12/02 17:01:26 by ekeller-@st      ###   ########.fr       */
+/*   Created: 2025/12/02 12:22:17 by ekeller-@st       #+#    #+#             */
+/*   Updated: 2025/12/02 17:09:20 by ekeller-@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef BUREAUCRAT_HPP
-# define BUREAUCRAT_HPP
+#ifndef FORM_HPP
+# define FORM_HPP
 
 # include <string>
+# include "Bureaucrat.hpp"
 
-class Bureaucrat {
+class Form{
 private:
-	std::string const _name;
-	int					_grade;
+	const std::string  _name;
+	bool 				_signed;
+	const int			 _gradeToSign;
+	const int 			_gradeToExecute;
+	
 	static int const	_highestGrade = 1;
 	static int const	_lowestGrade = 150;
-	
 public:
-	Bureaucrat();
-	Bureaucrat(std::string name, int grade);
-	Bureaucrat(const Bureaucrat& copy);
-	Bureaucrat& operator=(const Bureaucrat& obj);
-	~Bureaucrat();
+	Form();
+	Form(std::string name, int gradeToSign, int gradeToExecute);
+	Form(const Form& copy);
+	Form& operator=(const Form& obj);
+	~Form();
 
-	const std::string& getName() const;
-	// //for primitive types such as int is better to return
-	// //a copy(by value). not a reference. is more efficient.
-	int				getGrade() const;
-	void			incrementGrade();
-	void			decrementGrade();
-	void			setGrade(int grade);
+	const std::string&	getName() const;  
+	bool				isSigned() const;
+	int					getGradetoSign() const;
+	int					getGradetoExecute() const;
+	
+	void				beSigned(Bureaucrat& obj);
 
 	class GradeTooHighException: public std::exception {
 		public:
@@ -45,9 +47,9 @@ public:
 		public:
 			virtual const char* what() const throw();
 	};
-		
+
 };
 
-std::ostream& operator<<(std::ostream& out, const Bureaucrat& obj);
+std::ostream& operator<<(std::ostream& out, const Form& obj);
 
 #endif
