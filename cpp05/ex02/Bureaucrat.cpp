@@ -6,12 +6,12 @@
 /*   By: ekeller- <ekeller-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/28 14:58:33 by ekeller-@st       #+#    #+#             */
-/*   Updated: 2025/12/04 11:14:09 by ekeller-         ###   ########.fr       */
+/*   Updated: 2025/12/08 15:21:35 by ekeller-         ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
 #include "Bureaucrat.hpp"
-#include "Form.hpp"
+#include "AForm.hpp"
 
 #include <string>
 #include <iostream>
@@ -70,7 +70,7 @@ void	Bureaucrat::decrementGrade(){
 	_grade += 1;
 }
 
-void	Bureaucrat::signForm(Form& form){
+void	Bureaucrat::signForm(AForm& form){
 	try{
 		if (form.isSigned() == 1)
 		{
@@ -78,7 +78,7 @@ void	Bureaucrat::signForm(Form& form){
 			return ;
 		}
 		form.beSigned(*this);
-		std::cout << _name << " assinou " << form.getName() <<std::endl;
+		std::cout << _name << " signed " << form.getName() <<std::endl;
 	}
 	catch(std::exception &e){
 		std::cout << _name << " couldn't sign " << form.getName() << " because "
@@ -87,7 +87,7 @@ void	Bureaucrat::signForm(Form& form){
 }
 
 std::ostream& operator<<(std::ostream& out, const Bureaucrat& obj){
-	out << "Bureaucrat: " << obj.getName() << ", burocrata com classificação " << obj.getGrade() << "\n";
+	out << obj.getName() << ", burocrat with classification " << obj.getGrade() << "\n";
 	return out;
 }
 
@@ -99,4 +99,14 @@ const char* Bureaucrat::GradeTooHighException::what() const throw() {
 
 const char* Bureaucrat::GradeTooLowException::what() const throw() {
 	return ("Grade is too low!");
+}
+
+void			 Bureaucrat::executeForm(AForm const & form) const{
+	try{
+		form.execute(*this);
+		std::cout << _name << " executed " << form.getName() << " succesfully" << std::endl;
+	}
+	catch(std::exception& e){
+		std::cout << "Exception caught: " << e.what() << std::endl;
+	}
 }

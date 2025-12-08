@@ -6,14 +6,17 @@
 /*   By: ekeller- <ekeller-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/28 13:38:16 by ekeller-@st       #+#    #+#             */
-/*   Updated: 2025/12/04 12:04:58 by ekeller-         ###   ########.fr       */
+/*   Updated: 2025/12/08 17:39:08 by ekeller-         ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
 #include <iostream>
 #include <string>
 #include "Bureaucrat.hpp"
-#include "Form.hpp"
+#include "AForm.hpp"
+#include "PresidentialPardonForm.hpp"
+#include "ShrubberyCreationForm.hpp"
+#include "RobotomyRequestForm.hpp"
 
 void printTest(std::string str){
 	std::cout << "=============================" << std::endl;
@@ -22,96 +25,109 @@ void printTest(std::string str){
 }
 
 
-void testInvalidForm(){
-	printTest("0: TEST INVALID FORM");
+void testExecuteUnsignedForm(){
+	printTest("TEST 0: EXECUTE UNSIGNED FORM");
+	std::cout << std::endl << "Test Presidential Pardon: " << std::endl;
 	try{
-		Form nuclear("Launch Bomb", 0, 10);
-		std::cout << std::endl;
-		std::cout << nuclear;
+		Bureaucrat p("President", 1);
+		PresidentialPardonForm pp("Edward Snowden");
+		std::cout << p;
+		std::cout << pp;
+		p.executeForm(pp);
 	}
-	catch(std::exception &e){
-		std::cout << "Exception caught: " << e.what() << std::endl;
+	catch(std::exception& e){
+		std::cout << e.what() << std::endl;
 	}
+
+	std::cout << std::endl << "Test Shrubbery Creation: " << std::endl;
 	try{
-		Form nuclear("Launch Bomb", 150, 151);
-		std::cout << std::endl;
-		std::cout << nuclear;
+		Bureaucrat p("Gardener", 1);
+		ShrubberyCreationForm sc("House");
+		std::cout << p;
+		std::cout << sc;
+		p.executeForm(sc);
 	}
-	catch(std::exception &e){
-		std::cout << "Exception caught: " << e.what() << std::endl;
+	catch(std::exception& e){
+		std::cout << e.what() << std::endl;
 	}
 }
 
-void testValidSigning(){
-	printTest("1: TEST VALID SIGNING");
+void testExecuteValidSignedForm(){
+	printTest("TEST 1: VALID EXECUTION OF FORM ");
+	std::cout << std::endl << "Test Presidential Pardon: " << std::endl;
 	try{
-		Bureaucrat president("president", 1);
-		Bureaucrat intern("intern", 140);
-		Form nuclear("Launch Bomb", 1, 10);
-		Form internForm("Intern Form", 140, 140);
-		std::cout << president;
-		std::cout << intern;
-		std::cout << nuclear;
-		std::cout << internForm;
-		std::cout << "\nTry to sign forms: \n";
-		president.signForm(nuclear);
-		intern.signForm(internForm);
-		std::cout << nuclear;
-		std::cout << internForm;
+		Bureaucrat p("President", 1);
+		PresidentialPardonForm pp("Edward Snowden");
+		ShrubberyCreationForm sc;
+		std::cout << p;
+		std::cout << pp;
+		p.signForm(pp);
+		p.executeForm(pp);
 	}
-	catch(std::exception &e){
-		std::cout << "exception caught " << e.what() << std::endl;
+	catch(std::exception& e){
+		std::cout << e.what() << std::endl;
+	}
+	
+	std::cout << std::endl << "Test Shrubbery Creation: " << std::endl;
+	try{
+		Bureaucrat p("Gardener", 1);
+		ShrubberyCreationForm sc("House");
+		std::cout << p;
+		std::cout << sc;
+		p.signForm(sc);
+		p.executeForm(sc);
+	}
+	catch(std::exception& e){
+		std::cout << e.what() << std::endl;
+	}
+	
+	std::cout << std::endl << "Test Robotomization: " << std::endl;
+	try{
+		Bureaucrat p("Robot King", 1);
+		RobotomyRequestForm rr("Dog");
+		std::cout << p;
+		std::cout << rr;
+		p.signForm(rr);
+		p.executeForm(rr);
+	}
+	catch(std::exception& e){
+		std::cout << e.what() << std::endl;
 	}
 }
 
-void testInvalidSigning(){
-	printTest("2: TEST INVALID SIGNING");
+void testExecuteSignedFormInvalidGrade(){
+	printTest("TEST 2: INVALID EXECUTION OF FORM BECAUSE OF LOW GRADE");
+	std::cout << std::endl << "Test Presidential Pardon: " << std::endl;
 	try{
-		Bureaucrat intern("intern", 140);
-		Form nuclear("Launch Bomb", 1, 10);
-
-		std::cout << intern;
-		std::cout << nuclear;
-		std::cout << "\nTry to sign forms: \n";
-		intern.signForm(nuclear);
-		std::cout << nuclear;
+		Bureaucrat p("President", 6);
+		PresidentialPardonForm test("Edward Snowden");
+		std::cout << p;
+		std::cout << test;
+		p.signForm(test);
+		p.executeForm(test);
 	}
-	catch(std::exception &e){
-		std::cout << "exception caught " << e.what() << std::endl;
+	catch(std::exception& e){
+		std::cout << e.what() << std::endl;
 	}
-}
 
-void testCopyandAssignment(){
-	printTest("3: TEST COPY AND ASSIGNMENT");
+	std::cout << std::endl << "Test Shrubbery Creation: " << std::endl;
 	try{
-		Bureaucrat originalBureaucrat("Original Bureaucrat", 1);
-		Form originalForm("Launch Bomb", 1, 10);
-
-		std::cout << originalBureaucrat;
-		std::cout << originalForm;
-		
-		Form copiedForm(originalForm);
-		std::cout << "Display state of copied form: \n";
-		std::cout << copiedForm;
-		std::cout << "\nSign copied form: \n";
-		originalBureaucrat.signForm(copiedForm);
-		
-		std::cout << "\nDisplay copied form, original form and assigned form respectively: \n";
-		std::cout << copiedForm;
-		std::cout << originalForm;
-		Form assignedForm;
-		assignedForm = copiedForm;
-		std::cout << assignedForm;
+		Bureaucrat p("Gardener", 138);
+		ShrubberyCreationForm sc("House");
+		std::cout << p;
+		std::cout << sc;
+		p.signForm(sc);
+		p.executeForm(sc);
 	}
-	catch(std::exception &e){
-		std::cout << "exception caught " << e.what() << std::endl;
+	catch(std::exception& e){
+		std::cout << e.what() << std::endl;
 	}
 }
 
 int main(void) {
-	testInvalidForm();
-	testValidSigning();
-	testInvalidSigning();
-	testCopyandAssignment();
+	testExecuteUnsignedForm();
+	testExecuteValidSignedForm();
+	testExecuteSignedFormInvalidGrade();
+
     return 0;
 }

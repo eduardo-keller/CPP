@@ -6,7 +6,7 @@
 /*   By: ekeller- <ekeller-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/28 13:04:40 by ekeller-@st       #+#    #+#             */
-/*   Updated: 2025/12/06 12:49:06 by ekeller-         ###   ########.fr       */
+/*   Updated: 2025/12/08 13:02:34 by ekeller-         ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -39,7 +39,7 @@ public:
 	
 	void			incrementGrade();
 	void			decrementGrade();
-	void			signForm(Form& form);
+	void			signForm(AForm& form);
 	void			executeForm(AForm const & form) const;
 	
 
