@@ -1,14 +1,14 @@
-/******************************************************************************/
+/* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   Bureaucrat.cpp                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ekeller- <ekeller-@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: ekeller-@student.42sp.org.br <ekeller-@    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/28 14:58:33 by ekeller-@st       #+#    #+#             */
-/*   Updated: 2025/12/08 15:21:35 by ekeller-         ###   ########.fr       */
+/*   Updated: 2025/12/16 16:21:19 by ekeller-@st      ###   ########.fr       */
 /*                                                                            */
-/******************************************************************************/
+/* ************************************************************************** */
 
 #include "Bureaucrat.hpp"
 #include "AForm.hpp"
@@ -81,7 +81,7 @@ void	Bureaucrat::signForm(AForm& form){
 		std::cout << _name << " signed " << form.getName() <<std::endl;
 	}
 	catch(std::exception &e){
-		std::cout << _name << " couldn't sign " << form.getName() << " because "
+		std::cout << "Exception caught: " << _name << " couldn't sign " << form.getName() << " because "
 		  << e.what() << std::endl;
 	}
 }

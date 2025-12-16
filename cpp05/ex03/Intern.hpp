@@ -1,14 +1,14 @@
-/******************************************************************************/
+/* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   Intern.hpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ekeller- <ekeller-@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: ekeller-@student.42sp.org.br <ekeller-@    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/09 16:19:58 by ekeller-          #+#    #+#             */
-/*   Updated: 2025/12/11 16:46:58 by ekeller-         ###   ########.fr       */
+/*   Updated: 2025/12/16 16:13:00 by ekeller-@st      ###   ########.fr       */
 /*                                                                            */
-/******************************************************************************/
+/* ************************************************************************** */
 
 #ifndef INTERN_HPP
 # define INTERN_HPP
@@ -30,11 +30,6 @@ public:
     ~Intern(void);
     
     AForm*  makeForm(std::string const &formName, std::string const &target);
-
-    class FormNotFoundException : std::exception {
-        public:
-            virtual const char *what() const throw();
-    };
 
 };
 

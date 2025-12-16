@@ -1,14 +1,14 @@
-/******************************************************************************/
+/* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ekeller- <ekeller-@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: ekeller-@student.42sp.org.br <ekeller-@    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/28 13:38:16 by ekeller-@st       #+#    #+#             */
-/*   Updated: 2025/12/11 16:42:08 by ekeller-         ###   ########.fr       */
+/*   Updated: 2025/12/16 16:27:22 by ekeller-@st      ###   ########.fr       */
 /*                                                                            */
-/******************************************************************************/
+/* ************************************************************************** */
 
 #include "AForm.hpp"
 #include "Bureaucrat.hpp"
@@ -24,27 +24,8 @@ void printHeader(const std::string &title) {
     std::cout << "========================================\n";
 }
 
-void testInternBasic(void) {
-    printHeader("TEST 10: Intern - Basic Form Creation");
-
-    try {
-	Intern someRandomIntern;
-	AForm *rrf;
-
-	std::cout << "\nCreating robotomy request form...\n";
-	rrf = someRandomIntern.makeForm("robotomy request", "Bender");
-
-	if (rrf) {
-	    std::cout << *rrf << std::endl;
-	    delete rrf;
-	}
-    } catch (std::exception &e) {
-	std::cout << "Exception caught: " << e.what() << std::endl;
-    }
-}
-
 void testInternAllForms(void) {
-    printHeader("TEST 11: Intern - All Form Types");
+    printHeader("TEST 0: Intern - All Form Types");
 
     Intern intern;
     AForm *forms[3];
@@ -77,9 +58,9 @@ void testInternAllForms(void) {
 }
 
 void testInternInvalidForm(void) {
-    printHeader("TEST 12: Intern - Invalid Form Name");
+    printHeader("TEST 1: Intern - Invalid Form Name");
 
-    try {
+    
 	Intern intern;
 	AForm *form;
 
@@ -89,31 +70,28 @@ void testInternInvalidForm(void) {
 	if (form) {
 	    std::cout << *form << std::endl;
 	    delete form;
-	}
-    } catch (std::exception &e) {
-	std::cout << "Exception caught: " << e.what() << std::endl;
+	} else {
+        std::cout << "Form creation failed - received NULL pointer\n";
     }
 }
 
 void testInternWithBureaucrat(void) {
-    printHeader("TEST 13: Intern - Forms with Bureaucrat");
+    printHeader("TEST 2: Intern - Forms with Bureaucrat");
 
     try {
 	Intern intern;
 	Bureaucrat boss("Boss", 1);
 	AForm *form;
 
-	std::cout << "\nIntern creates form...\n";
 	form = intern.makeForm("presidential pardon", "Zaphod Beeblebrox");
 
 	if (form) {
 	    std::cout << "\n" << boss << std::endl;
-	    std::cout << *form << std::endl;
+	    std::cout << *form;
 
-	    std::cout << "\nBoss signs the form...\n";
 	    boss.signForm(*form);
-
-	    std::cout << "\nBoss executes the form...\n";
+		std::cout << *form << std::endl;
+		
 	    boss.executeForm(*form);
 
 	    delete form;
@@ -123,52 +101,10 @@ void testInternWithBureaucrat(void) {
     }
 }
 
-void testInternMultipleCreations(void) {
-    printHeader("TEST 14: Intern - Multiple Form Creations");
-
-    try {
-	Intern intern;
-	AForm *form1;
-	AForm *form2;
-	AForm *form3;
-
-	std::cout << "\nCreating first robotomy request...\n";
-	form1 = intern.makeForm("robotomy request", "Target1");
-
-	std::cout << "\nCreating second robotomy request...\n";
-	form2 = intern.makeForm("robotomy request", "Target2");
-
-	std::cout << "\nCreating third robotomy request...\n";
-	form3 = intern.makeForm("robotomy request", "Target3");
-
-	std::cout << "\n--- All forms created ---\n";
-	if (form1)
-	    std::cout << *form1 << std::endl;
-	if (form2)
-	    std::cout << *form2 << std::endl;
-	if (form3)
-	    std::cout << *form3 << std::endl;
-
-	delete form1;
-	delete form2;
-	delete form3;
-    } catch (std::exception &e) {
-	std::cout << "Exception caught: " << e.what() << std::endl;
-    }
-}
-
 int main(void) {
-    std::cout << "\n\n";
-    printHeader("=== INTERN TESTS ===");
-    std::cout << "\n";
-
-    testInternBasic();
     testInternAllForms();
     testInternInvalidForm();
     testInternWithBureaucrat();
-    testInternMultipleCreations();
-
-    printHeader("All tests completed!");
 
     return 0;
 }

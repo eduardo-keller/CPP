@@ -1,14 +1,14 @@
-/******************************************************************************/
+/* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ekeller- <ekeller-@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: ekeller-@student.42sp.org.br <ekeller-@    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/28 13:38:16 by ekeller-@st       #+#    #+#             */
-/*   Updated: 2025/12/08 17:39:08 by ekeller-         ###   ########.fr       */
+/*   Updated: 2025/12/16 17:20:19 by ekeller-@st      ###   ########.fr       */
 /*                                                                            */
-/******************************************************************************/
+/* ************************************************************************** */
 
 #include <iostream>
 #include <string>
@@ -58,7 +58,6 @@ void testExecuteValidSignedForm(){
 	try{
 		Bureaucrat p("President", 1);
 		PresidentialPardonForm pp("Edward Snowden");
-		ShrubberyCreationForm sc;
 		std::cout << p;
 		std::cout << pp;
 		p.signForm(pp);
@@ -118,6 +117,19 @@ void testExecuteSignedFormInvalidGrade(){
 		std::cout << sc;
 		p.signForm(sc);
 		p.executeForm(sc);
+	}
+	catch(std::exception& e){
+		std::cout << e.what() << std::endl;
+	}
+
+	std::cout << std::endl << "Test Robotomization: " << std::endl;
+	try{
+		Bureaucrat p("Robot King", 72);
+		RobotomyRequestForm rr("Dog");
+		std::cout << p;
+		std::cout << rr;
+		p.signForm(rr);
+		p.executeForm(rr);
 	}
 	catch(std::exception& e){
 		std::cout << e.what() << std::endl;

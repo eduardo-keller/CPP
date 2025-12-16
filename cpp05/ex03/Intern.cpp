@@ -1,14 +1,14 @@
-/******************************************************************************/
+/* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   Intern.cpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ekeller- <ekeller-@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: ekeller-@student.42sp.org.br <ekeller-@    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/10 11:23:03 by ekeller-          #+#    #+#             */
-/*   Updated: 2025/12/11 16:39:36 by ekeller-         ###   ########.fr       */
+/*   Updated: 2025/12/16 16:12:54 by ekeller-@st      ###   ########.fr       */
 /*                                                                            */
-/******************************************************************************/
+/* ************************************************************************** */
 
 #include <string>
 #include <iostream>
@@ -50,7 +50,7 @@ AForm* Intern::createRobotomy(std::string const &target){
 
 AForm*  Intern::makeForm(std::string const &formName, std::string const &target){
     const std::string forms[3] = {"presidential pardon", "shrubbery creation", "robotomy request"};
-
+    
     AForm* (Intern::*formCreator[3])(const std::string& target) = {
         &Intern::createPardon,
         &Intern::createShrubbery,
@@ -64,9 +64,5 @@ AForm*  Intern::makeForm(std::string const &formName, std::string const &target)
         }  
     }
     std::cout << "Error: Form name \"" << formName << "\" does not exist" << std::endl;
-    throw FormNotFoundException();
-}
-
-const char *Intern::FormNotFoundException::what(void) const throw() {
-    return "Form not found";
+    return NULL;
 }
