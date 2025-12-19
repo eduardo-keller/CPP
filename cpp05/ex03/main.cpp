@@ -6,7 +6,7 @@
 /*   By: ekeller-@student.42sp.org.br <ekeller-@    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/28 13:38:16 by ekeller-@st       #+#    #+#             */
-/*   Updated: 2025/12/16 16:27:22 by ekeller-@st      ###   ########.fr       */
+/*   Updated: 2025/12/17 12:12:30 by ekeller-@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,9 @@
 #include "RobotomyRequestForm.hpp"
 #include "ShrubberyCreationForm.hpp"
 #include <iostream>
+
+//this exercise shows the factory pattern in OOP. If a new form is
+//introduced, I only need to modify the creation logic in one place. 
 
 void printHeader(const std::string &title) {
     std::cout << "========================================\n";
@@ -32,13 +35,10 @@ void testInternAllForms(void) {
     int i;
 
     try {
-	std::cout << "\nCreating shrubbery creation form...\n";
 	forms[0] = intern.makeForm("shrubbery creation", "garden");
 
-	std::cout << "\nCreating robotomy request form...\n";
 	forms[1] = intern.makeForm("robotomy request", "Marvin");
 
-	std::cout << "\nCreating presidential pardon form...\n";
 	forms[2] = intern.makeForm("presidential pardon", "Arthur Dent");
 
 	std::cout << "\n--- Forms Created ---\n";
@@ -70,9 +70,7 @@ void testInternInvalidForm(void) {
 	if (form) {
 	    std::cout << *form << std::endl;
 	    delete form;
-	} else {
-        std::cout << "Form creation failed - received NULL pointer\n";
-    }
+	}
 }
 
 void testInternWithBureaucrat(void) {

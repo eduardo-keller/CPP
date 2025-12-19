@@ -6,7 +6,7 @@
 /*   By: ekeller-@student.42sp.org.br <ekeller-@    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/10 11:23:03 by ekeller-          #+#    #+#             */
-/*   Updated: 2025/12/16 16:12:54 by ekeller-@st      ###   ########.fr       */
+/*   Updated: 2025/12/17 12:16:26 by ekeller-@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,10 +48,16 @@ AForm* Intern::createRobotomy(std::string const &target){
     return new RobotomyRequestForm(target);
 }
 
+
 AForm*  Intern::makeForm(std::string const &formName, std::string const &target){
     const std::string forms[3] = {"presidential pardon", "shrubbery creation", "robotomy request"};
     
+    //array of function pointers so no if/else is needed.
     AForm* (Intern::*formCreator[3])(const std::string& target) = {
+        //needs an address &. its not tied to any object:
+        //I am taking the abstract, un-bound address of this
+        //specific member function's code, separate from any
+        //specific object,
         &Intern::createPardon,
         &Intern::createShrubbery,
         &Intern::createRobotomy};
