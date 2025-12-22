@@ -2,7 +2,7 @@ NAME = cast
 CC = c++
 FLAGS = -std=c++98 -Wall -Wextra -Werror
 
-SRC = main.cpp
+SRC = main.cpp ScalarConverter.cpp
 OBJ = $(SRC:.cpp=.o)
 
 all: $(NAME)
