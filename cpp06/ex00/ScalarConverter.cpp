@@ -1,18 +1,19 @@
-/* ************************************************************************** */
+/******************************************************************************/
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   ScalarConverter.cpp                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ekeller-@student.42sp.org.br <ekeller-@    +#+  +:+       +#+        */
+/*   By: ekeller- <ekeller-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/17 18:23:33 by ekeller-@st       #+#    #+#             */
-/*   Updated: 2025/12/22 16:54:55 by ekeller-@st      ###   ########.fr       */
+/*   Updated: 2026/01/11 19:07:27 by ekeller-         ###   ########.fr       */
 /*                                                                            */
-/* ************************************************************************** */
+/******************************************************************************/
 
 #include "ScalarConverter.hpp"
 #include <cctype>
 #include <string>
+#include <iostream>
 
 ScalarConverter::ScalarConverter() {}
 
@@ -76,5 +77,43 @@ bool ScalarConverter::isDouble(const std::string& str){
 }
 
 bool ScalarConverter::isChar(const std::string& str){
-    return (str.length() == 1 && !std::isdigit(str[0]) && std::isprint(str[0]));
+    return (str.length() == 1 && !std::isdigit(str[0])); // && std::isprint(str[0]? better to include before printing?
+}
+
+bool ScalarConverter::isPseudoLiteral(const std::string& literal) {
+	return literal == "nan" || literal == "nanf" ||
+		   literal == "+inf" || literal == "-inf" ||
+		   literal == "+inff" || literal == "-inff" ||
+		   literal == "inf" || literal == "inff";
+}
+
+void ScalarConverter::convert(const std::string& literal) {
+    if (literal.empty())
+        return ;
+    if (isPseudoLiteral(literal)) {
+        printPseudo(literal);
+        return ;
+    }
+    
+}
+
+void ScalarConverter::printPseudo(const std::string& str) {
+    if (str == "nan" || str == "nanf" ) {
+        std::cout << "char: impossible" << std::endl;
+        std::cout << "int: impossible" << std::endl;
+        std::cout << "float: nanf" << std::endl;
+        std::cout << "double: nan" << std::endl;
+    }
+    else if (str == "+inf" || str == "+inff" || str == "inf" || str == "inff") {
+        std::cout << "char: impossible" << std::endl;
+        std::cout << "int: impossible" << std::endl;
+        std::cout << "float: +inff" << std::endl;
+        std::cout << "double: +inf" << std::endl;
+    }
+    else if (str == "-inf" || str == "-inff") {
+        std::cout << "char: impossible" << std::endl;
+        std::cout << "int: impossible" << std::endl;
+        std::cout << "float: -inff" << std::endl;
+        std::cout << "double: -inf" << std::endl;
+    }
 }

@@ -1,14 +1,14 @@
-/* ************************************************************************** */
+/******************************************************************************/
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   ScalarConverter.hpp                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ekeller-@student.42sp.org.br <ekeller-@    +#+  +:+       +#+        */
+/*   By: ekeller- <ekeller-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/17 17:32:08 by ekeller-@st       #+#    #+#             */
-/*   Updated: 2025/12/22 15:06:29 by ekeller-@st      ###   ########.fr       */
+/*   Updated: 2026/01/11 18:41:34 by ekeller-         ###   ########.fr       */
 /*                                                                            */
-/* ************************************************************************** */
+/******************************************************************************/
 
 #ifndef SCALARCONVERTER_HPP
 # define SCALARCONVERTER_HPP
@@ -23,15 +23,15 @@ class ScalarConverter {
 	ScalarConverter& operator=(const ScalarConverter& obj);
 	~ScalarConverter();
 	
-	
-	public:
 	static bool isInt(const std::string& str);
 	static bool isFloat(const std::string& str);
 	static bool isDouble(const std::string& str);
 	static bool isChar(const std::string& str);
+	static bool isPseudoLiteral(const std::string& str);
+	static void printPseudo(const std::string& str);
 	
-	
-	//static void convert(const std::string&  literal);
+	public:
+	static void convert(const std::string&  literal);
 };
 
 #endif
