@@ -88,13 +88,32 @@ bool ScalarConverter::isPseudoLiteral(const std::string& literal) {
 }
 
 void ScalarConverter::convert(const std::string& literal) {
+    
     if (literal.empty())
         return ;
+    literalType type = detectType(literal);
     if (isPseudoLiteral(literal)) {
         printPseudo(literal);
         return ;
     }
+
+
     
+}
+
+literalType ScalarConverter::detectType(const std::string& str) {
+    if (isChar(str))
+        return CHAR;
+    else if (isInt(str))
+        return INT;
+    else if (isFloat(str))
+        return FLOAT;
+    else if (isDouble(str))
+        return DOUBLE;
+    else if (isPseudoLiteral(str))
+        return PSEUDO_LITERAL;    
+    else
+        return INVALID;
 }
 
 void ScalarConverter::printPseudo(const std::string& str) {
