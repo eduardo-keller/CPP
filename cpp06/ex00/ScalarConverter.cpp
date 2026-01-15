@@ -14,6 +14,9 @@
 #include <cctype>
 #include <string>
 #include <iostream>
+#include <cstdlib>
+#include <limits> 
+#include <iomanip>
 
 ScalarConverter::ScalarConverter() {}
 
@@ -88,20 +91,81 @@ bool ScalarConverter::isPseudoLiteral(const std::string& literal) {
 }
 
 void ScalarConverter::convert(const std::string& literal) {
-    
+    double value = 0; 
+    bool intImpossible = false;
+    bool floatImpossible = false;
+
     if (literal.empty())
         return ;
     literalType type = detectType(literal);
-    if (isPseudoLiteral(literal)) {
-        printPseudo(literal);
-        return ;
+
+
+    switch (type) {
+        case CHAR:
+            value = static_cast<double>(literal[0]);
+            break;
+        case INT:
+            value = std::strtod(literal.c_str(), NULL);
+            if (value > std::numeric_limits<int>::max() || value < std::numeric_limits<int>::min())
+                intImpossible = true;
+            break;
+        case FLOAT:
+            value = std::strtod(literal.c_str(), NULL);
+            //for min float needs to be -max() because min gives the smallest positive valu in c++
+            if (value > std::numeric_limits<float>::max() || value < -std::numeric_limits<float>::max())
+                floatImpossible = true;
+            break;
+        case DOUBLE:
+            value = std::strtod(literal.c_str(), NULL);
+            break;
+        case PSEUDO_LITERAL:
+            printPseudo(literal);
+            return ;
+        case INVALID:
+            std::cout << "char: impossible" << std::endl;
+			std::cout << "int: impossible" << std::endl;
+			std::cout << "float: impossible" << std::endl;
+			std::cout << "double: impossible" << std::endl;
+            return ;
+
     }
-
-
-    
+    printChar(value);
+    printInt(value, intImpossible);
+    printFloat(value, floatImpossible);
+    printDouble(value);
 }
 
-literalType ScalarConverter::detectType(const std::string& str) {
+void ScalarConverter::printChar(double value){
+    std::cout << "char: ";
+    if (value < 32 || value > 126)
+		std::cout << "Non displayable" << std::endl;
+    else
+        std::cout << "'" << static_cast<char>(value) << "'" << std::endl;
+}
+
+void ScalarConverter::printInt(double value, bool intImpossible) {
+    std::cout << "int: ";
+    if (intImpossible)
+        std::cout <<  "impossible" << std::endl;
+    else
+        std::cout << static_cast<int>(value) << std::endl;
+}
+
+void ScalarConverter::printFloat(double value, bool floatImpossible) {
+    std::cout << "float: ";
+    if (floatImpossible)
+        std::cout <<  "impossible" << std::endl;
+    else
+        std::cout << std::fixed << std::setprecision(1) << static_cast<float>(value) << "f" << std::endl;
+}
+
+void ScalarConverter::printDouble(double value) {
+    std::cout << std::fixed << std::setprecision(1) << "double: " << static_cast<double>(value) <<  std::endl;
+}
+
+
+
+ScalarConverter::literalType ScalarConverter::detectType(const std::string& str) {
     if (isChar(str))
         return CHAR;
     else if (isInt(str))
