@@ -6,7 +6,7 @@
 /*   By: ekeller- <ekeller-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/20 17:11:52 by ekeller-          #+#    #+#             */
-/*   Updated: 2026/01/21 16:07:13 by ekeller-         ###   ########.fr       */
+/*   Updated: 2026/01/21 16:21:55 by ekeller-         ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -39,6 +39,9 @@ Base* generate(void) {
     }
 }
 
+//use dynamic_cast to identify the pointer type at 
+//run time. if I used static_cast the program would always convert
+//the pointer to type A at compile time, and the first if will always be true.
 void identify(Base* p)
 {
     if (dynamic_cast<A*>(p))
