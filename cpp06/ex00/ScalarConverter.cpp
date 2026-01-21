@@ -6,7 +6,7 @@
 /*   By: ekeller- <ekeller-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/17 18:23:33 by ekeller-@st       #+#    #+#             */
-/*   Updated: 2026/01/11 19:07:27 by ekeller-         ###   ########.fr       */
+/*   Updated: 2026/01/20 15:39:40 by ekeller-         ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -17,6 +17,10 @@
 #include <cstdlib>
 #include <limits> 
 #include <iomanip>
+
+//static_cast is used for compile-time conversions. it computes a new value from the original value
+//for example, if you convert 42.9 to int will give 42, which is a completely different bit
+//pattern 
 
 ScalarConverter::ScalarConverter() {}
 
