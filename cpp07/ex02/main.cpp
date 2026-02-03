@@ -6,7 +6,7 @@
 /*   By: ekeller- <ekeller-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/26 17:21:08 by ekeller-          #+#    #+#             */
-/*   Updated: 2026/01/28 12:24:54 by ekeller-         ###   ########.fr       */
+/*   Updated: 2026/01/28 12:27:03 by ekeller-         ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -111,7 +111,4 @@ int main(){
     testArrayInt();
     testDeepCopy();
     testArrayString();
-
-    
-
 }
