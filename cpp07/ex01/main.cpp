@@ -34,11 +34,12 @@ void increment(int &i){
 
 
 int main(void){
-   char array_char[] = {'a', 'b', '4'};
+    char array_char[] = {'a', 'b', '4'};
     int array_int[] = {1, 2 , 3, 4};
     std::string array_str[] = {"hello", "world"};
+    const std::string array_str_const[] = {"hello", "world"};
     
-    std::cout << "---TEST CHAR---" << std::endl;
+    std::cout << "---TEST CHAR WITH TOUPPER---" << std::endl;
     std::cout << "Initial array: ";
     iter(array_char, sizeof(array_char)/ sizeof(array_char[0]), print);;
     iter(array_char, sizeof(array_char)/ sizeof(array_char[0]), toUpper);
@@ -47,7 +48,7 @@ int main(void){
     iter(array_char, sizeof(array_char)/ sizeof(array_char[0]), print);
     std::cout << std::endl;
 
-    std::cout << "---TEST INT---" << std::endl;
+    std::cout << "---TEST INT WITH INCREMENT---" << std::endl;
     std::cout << "Initial array: ";
     iter(array_int, sizeof(array_int)/sizeof(array_int[0]), print);
     std::cout << std::endl;
@@ -56,10 +57,13 @@ int main(void){
     iter(array_int, sizeof(array_int)/sizeof(array_int[0]), print);
     std::cout << std::endl;
     
-    std::cout << "---TEST STRING---" << std::endl;
+    std::cout << "---TEST STRING WITH PRINT---" << std::endl;
 	size_t strLen = sizeof(array_str) / sizeof(array_str[0]);
 
 	std::cout << "String array: ";
 	::iter(array_str, strLen, print<std::string>);
+	std::cout << std::endl;
+    std::cout << "String const array: ";
+	::iter(array_str_const, strLen, print<std::string>);
 	std::cout << std::endl;
 }

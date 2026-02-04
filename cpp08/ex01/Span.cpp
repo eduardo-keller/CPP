@@ -44,9 +44,26 @@ unsigned int Span::longestSpan() const{
 }
 
 
-unsigned int Span::shortestSpan() const{
-    return 1;
+unsigned int Span::shortestSpan() const {
+    if (_numbers.size() < 2)
+        throw std::runtime_error("Not enough numbers to calculate span");
+
+    std::vector<int> sorted = _numbers;
+    std::sort(sorted.begin(), sorted.end());
+
+    long long shortSpan =
+        static_cast<long long>(sorted[1]) - static_cast<long long>(sorted[0]);
+
+    for (std::size_t i = 0; i + 1 < sorted.size(); ++i) {
+        long long currentSpan =
+            static_cast<long long>(sorted[i + 1]) - static_cast<long long>(sorted[i]);
+        if (currentSpan < shortSpan)
+            shortSpan = currentSpan;
+    }
+
+    return static_cast<unsigned int>(shortSpan);
 }
+
 
 void Span::addNumber(int nb){
     if (_numbers.size() >= _maxSize)

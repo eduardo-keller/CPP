@@ -19,6 +19,7 @@
 int main() {
     Data initial_data;
     Data *deserialized_data;
+    //uintptr_t has the exact size of a pointer according to your OS.
     uintptr_t serialized_data;
     
     initial_data.id = 1;

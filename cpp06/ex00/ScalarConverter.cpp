@@ -84,7 +84,7 @@ bool ScalarConverter::isDouble(const std::string& str){
 }
 
 bool ScalarConverter::isChar(const std::string& str){
-    return (str.length() == 1 && !std::isdigit(str[0])); // && std::isprint(str[0]? better to include before printing?
+    return (str.length() == 1 && !std::isdigit(str[0])); 
 }
 
 bool ScalarConverter::isPseudoLiteral(const std::string& literal) {
@@ -112,6 +112,8 @@ void ScalarConverter::convert(const std::string& literal) {
             value = std::strtod(literal.c_str(), NULL);
             if (value > std::numeric_limits<int>::max() || value < std::numeric_limits<int>::min())
                 intImpossible = true;
+            if (value > std::numeric_limits<float>::max() || value < -std::numeric_limits<float>::max())
+                floatImpossible = true;
             break;
         case FLOAT:
             value = std::strtod(literal.c_str(), NULL);

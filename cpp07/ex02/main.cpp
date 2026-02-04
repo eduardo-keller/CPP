@@ -13,6 +13,7 @@
 #include "Array.hpp"
 #include <iostream>
 #include <string>
+#include <cstdlib>
 
 void testArrayInt(void){
     Array<int> empty;

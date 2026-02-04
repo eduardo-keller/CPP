@@ -26,7 +26,7 @@ class Array{
     public:
     Array(): _array(NULL), _size(0) {}
     Array(unsigned int n): _array(new T[n]()), _size(n) {}
-    Array(const Array &copy): _array (new T[copy._size]), _size(copy._size){
+    Array(const Array &copy): _array(new T[copy._size]), _size(copy._size){
         for(unsigned int i = 0; i < _size; i++)
             _array[i] = copy._array[i];
     }

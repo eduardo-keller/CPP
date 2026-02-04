@@ -13,13 +13,33 @@
 #include "Span.hpp"
 #include <iostream>
 
-int main(){
-    Span test(2);
+// int main(){
+//     Span test(10);
+//     std::vector<int> range;
+
+//     for(int i = 2; i < 10; i++)
+//         range.push_back(i);
     
-    test.addNumber(2);
-    test.addNumber(3);
-    try {test.addNumber(4);}
-    catch (std::exception &e) {std::cout << "Error: "<< e.what() << std::endl;}
+//     test.addNumber(12);
+//     test.addNumber(13);
+//     test.addRange(range.begin(), range.end());
+//     test.printNumbers();
+//     test.shortestSpan();
     
-    test.printNumbers();
+//     try {test.addNumber(10);}
+//     catch (std::exception &e) {std::cout << "Error: "<< e.what() << std::endl;}
+    
+// }
+
+int main()
+{
+Span sp = Span(5);
+sp.addNumber(6);
+sp.addNumber(3);
+sp.addNumber(17);
+sp.addNumber(9);
+sp.addNumber(11);
+std::cout << sp.shortestSpan() << std::endl;
+std::cout << sp.longestSpan() << std::endl;
+return 0;
 }
