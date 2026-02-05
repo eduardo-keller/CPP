@@ -34,6 +34,10 @@ Span& Span::operator=(const Span& copy){
 
 Span::~Span(){}
 
+unsigned int Span::get_numbers(){
+    return _numbers.size();
+}
+
 unsigned int Span::longestSpan() const{
     if (_numbers.size() < 2)
         throw std::runtime_error("Not enough numbers to calculate span");

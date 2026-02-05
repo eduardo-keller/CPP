@@ -32,6 +32,7 @@ class Span {
         void addRange(iterator begin, iterator end);
         unsigned int shortestSpan() const;
         unsigned int longestSpan() const;
+        unsigned int get_numbers();
 
         void printNumbers(void) const;
     
