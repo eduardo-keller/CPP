@@ -6,7 +6,7 @@
 /*   By: ekeller- <ekeller-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/09 16:35:51 by ekeller-          #+#    #+#             */
-/*   Updated: 2026/02/11 17:33:46 by ekeller-         ###   ########.fr       */
+/*   Updated: 2026/02/12 13:00:04 by ekeller-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,5 +25,5 @@ int main(int argc, char **argv){
         btc.parseRates();
         btc.parseInput(argv[1]);
     }
-    catch(std::exception &e) {std::cout << e.what() << std::endl;}
+    catch(std::exception &e) {std::cerr << e.what() << std::endl;}
 }
