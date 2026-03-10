@@ -6,7 +6,7 @@
 /*   By: ekeller- <ekeller-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/06 18:59:26 by ekeller-          #+#    #+#             */
-/*   Updated: 2026/03/06 18:59:29 by ekeller-         ###   ########.fr       */
+/*   Updated: 2026/03/10 18:13:55 by ekeller-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 #include <set>
 #include <stdexcept>
 #include <cerrno>
+#include <iostream>
 
 PmergeMe::PairedElements::PairedElements() : larger(0), smaller(0)
 {
@@ -138,52 +139,49 @@ std::vector<size_t> PmergeMe::buildJacobsthalSequence(size_t upperBoundExclusive
 	return sequence;
 }
 
-std::vector<size_t> PmergeMe::buildInsertionOrder(size_t pendingCount)
+std::vector<size_t> PmergeMe::buildInsertionOrder(size_t pairedPendingCount)
 {
-	std::vector<size_t> order;
-	if (pendingCount == 0)
-	{
-		return order;
-	}
+    std::vector<size_t> order;
 
-	std::vector<size_t> jacobsthalSequence = buildJacobsthalSequence(pendingCount + 2);
-	std::vector<bool> scheduled(pendingCount, false);
-	size_t scheduledCount = 0;
+    if (pairedPendingCount == 0)
+        return order;
 
-	for (size_t groupIndex = 2; groupIndex < jacobsthalSequence.size() && scheduledCount < pendingCount; ++groupIndex)
-	{
-		size_t currentJacob = jacobsthalSequence[groupIndex];
-		size_t previousJacob = jacobsthalSequence[groupIndex - 1];
-		size_t startIndex = currentJacob < pendingCount ? currentJacob : pendingCount;
+    // Total number of pairs that have a "b_i"
+    // b1 is already in mainChain, so pendingElements starts at b2. we add +1
+	//to account for all indexes.
+    size_t totalPairs = pairedPendingCount + 1;
 
-		for (size_t pendingIndex = startIndex; pendingIndex > previousJacob && scheduledCount < pendingCount; --pendingIndex)
-		{
-			size_t index = pendingIndex - 1;
-			if (!scheduled[index])
-			{
-				order.push_back(index);
-				scheduled[index] = true;
-				++scheduledCount;
-			}
-		}
-	}
+    // Canonical Ford–Johnson checkpoints: 1, 3, 5, 11, 21, ... i.e., the jacobstal sequence
+    size_t previousJacob = 1;
+    size_t currentJacob = 3;
 
-	for (size_t index = 0; index < pendingCount; ++index)
-	{
-		if (!scheduled[index])
-		{
-			order.push_back(index);
-		}
-	}
+    while (true)
+    {
+        size_t start = (currentJacob < totalPairs) ? currentJacob : totalPairs;
 
-	return order;
+        // Insert block (previousJacob, start] in descending order
+        // logicalIndex is the pair number i in b_i
+        for (size_t logicalIndex = start; logicalIndex > previousJacob; --logicalIndex)
+        {
+            // Convert b_i to pendingElements index:
+            // pending[0] = b2, so index = i - 2
+            order.push_back(logicalIndex - 2);
+        }
+
+        if (currentJacob >= totalPairs)
+            break;
+
+        size_t nextJacob = currentJacob + 2 * previousJacob;
+        previousJacob = currentJacob;
+        currentJacob = nextJacob;
+    }
+	//example:
+	//index insertion order: [1, 0, 3, 2, 7, 6, 5, 4]
+	//pairs insertion order: [s3, s2, s5, s4, s9, s8, s7, s6]
+	//does not match because s1 was already inserted in the main chain.
+    return order;
 }
 
-// bool PmergeMe::comparePairsByLargerElement(const PairedElementsWithIndex& left,
-// 								   const PairedElementsWithIndex& right)
-// {
-// 	return left.elements.larger < right.elements.larger;
-// }
 
 //build pairs filling the struct PairedElements with larger and smaller
 std::vector<PmergeMe::PairedElements> PmergeMe::buildVectorPairs(
@@ -263,15 +261,6 @@ std::deque<PmergeMe::PairedElementsWithIndex> PmergeMe::indexDequePairs(
 	return indexedPairs;
 }
 
-// void PmergeMe::sortVectorPairsByLargerElement(std::vector<PairedElementsWithIndex>& indexedPairs)
-// {
-// 	std::stable_sort(indexedPairs.begin(), indexedPairs.end(), comparePairsByLargerElement);
-// }
-
-// void PmergeMe::sortDequePairsByLargerElement(std::deque<PairedElementsWithIndex>& indexedPairs)
-// {
-// 	std::stable_sort(indexedPairs.begin(), indexedPairs.end(), comparePairsByLargerElement);
-// }
 
 std::vector<int> PmergeMe::extractVectorLargerElements(
 	const std::vector<PairedElementsWithIndex>& indexedPairs)
