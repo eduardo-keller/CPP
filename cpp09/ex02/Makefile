@@ -1,23 +1,26 @@
 NAME = PmergeMe
 CC = c++
-FLAGS = -std=c++98 -Wall -Wextra -Werror
-
-SRC = main.cpp PmergeMe.cpp
-OBJ = $(SRC:.cpp=.o)
+CFLAGS = -Wall -Wextra -Werror -std=c++98
+SRCS = main.cpp PmergeMe.cpp
+OBJS = $(SRCS:.cpp=.o)
 
 all: $(NAME)
 
-$(NAME): $(OBJ)
-	$(CC) $(FLAGS) $(OBJ) -o $(NAME)
+$(NAME): $(OBJS)
+	@$(CC) $(CFLAGS) -o $(NAME) $(OBJS)
+	@echo "PmergeMe"
 
-%.o: %.cpp
-	$(CC) $(FLAGS) -c $< -o $@
+%.o: %.cpp PmergeMe.hpp
+	@$(CC) $(CFLAGS) -c $< -o $@
+	@echo "Compiling $<"
 
 clean:
-	rm -f $(OBJ)
+	@rm -f $(OBJS)
+	@echo "Objects removed."
 
 fclean: clean
-	rm -f $(NAME)
+	@rm -f $(NAME)
+	@echo "Executable removed."
 
 re: fclean all
 

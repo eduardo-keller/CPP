@@ -5,59 +5,106 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: ekeller- <ekeller-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/03/03 12:06:36 by ekeller-          #+#    #+#             */
-/*   Updated: 2026/03/03 12:07:06 by ekeller-         ###   ########.fr       */
+/*   Created: 2026/03/06 18:59:38 by ekeller-          #+#    #+#             */
+/*   Updated: 2026/03/06 18:59:40 by ekeller-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-// PmergeMe.hpp
 #ifndef PMERGEME_HPP
 #define PMERGEME_HPP
 
 #include <vector>
 #include <deque>
 #include <string>
+#include <exception>
+#include <cstddef>
 
-class PmergeMe {
-public:
-    PmergeMe();
-    ~PmergeMe();
-
-    void run(int argc, char** argv);
-
+class PmergeMe
+{
 private:
-    struct IntPair {
-        int small;
-        int big;
-    };
+	struct PairedElements
+	{
+		int larger;
+		int smaller;
+		PairedElements();
+		PairedElements(int first, int second);
+	};
 
-    // Parsing / validation
-    static std::vector<int> parseInputToVector(int argc, char** argv);
-    static int parsePositiveIntToken(const std::string& token);
+	struct PairedElementsWithIndex
+	{
+		PairedElements elements;
+		size_t originalIndex;
+		PairedElementsWithIndex();
+		PairedElementsWithIndex(const PairedElements& pairElements, size_t index);
+	};
 
-    // Display
-    static void printVector(const std::string& label, const std::vector<int>& v);
-    static void printDeque(const std::string& label, const std::deque<int>& d);
+	std::vector<int> _vector;
+	std::deque<int> _deque;
+	double _vectorTime;
+	double _dequeTime;
 
-    // Timing
-    static long long nowMicroseconds();
+	static std::vector<size_t> buildJacobsthalSequence(size_t upperBoundExclusive);
+	static std::vector<size_t> buildInsertionOrder(size_t pendingCount);
 
-    // Ford–Johnson (merge-insert) implementations (separate per container)
-    static void fordJohnsonSortVector(std::vector<int>& data);
-    static void fordJohnsonSortDeque(std::deque<int>& data);
+	static bool comparePairsByLargerElement(const PairedElementsWithIndex& left,
+								   const PairedElementsWithIndex& right);
 
-    // Helpers (separate per container where it matters)
-    static size_t lowerBoundVector(const std::vector<int>& data, int value, size_t endExclusive);
-    static size_t lowerBoundDeque(const std::deque<int>& data, int value, size_t endExclusive);
+	std::vector<PairedElements> buildVectorPairs(const std::vector<int>& elements,
+										bool& hasStraggler, int& stragglerValue);
+	std::deque<PairedElements> buildDequePairs(const std::deque<int>& elements,
+										bool& hasStraggler, int& stragglerValue);
 
-    static std::vector<size_t> buildJacobsthalInsertionOrder(size_t pairCount);
+	std::vector<PairedElementsWithIndex> indexVectorPairs(const std::vector<PairedElements>& pairs);
+	std::deque<PairedElementsWithIndex> indexDequePairs(const std::deque<PairedElements>& pairs);
 
-    static void reorderPairsBySortedBigsVector(std::vector<IntPair>& pairs,
-                                              const std::vector<int>& sortedBigs);
-    static void reorderPairsBySortedBigsDeque(std::deque<IntPair>& pairs,
-                                             const std::deque<int>& sortedBigs);
+	std::vector<int> extractVectorLargerElements(const std::vector<PairedElementsWithIndex>& indexedPairs);
+	std::deque<int> extractDequeLargerElements(const std::deque<PairedElementsWithIndex>& indexedPairs);
 
-    static bool isSortedVector(const std::vector<int>& v);
+	std::vector<PairedElements> reorderVectorPairsByLarger(
+		const std::vector<PairedElementsWithIndex>& indexedPairs,
+		const std::vector<int>& sortedLargerElements);
+	std::deque<PairedElements> reorderDequePairsByLarger(
+		const std::deque<PairedElementsWithIndex>& indexedPairs,
+		const std::deque<int>& sortedLargerElements);
+
+	std::vector<int> buildVectorMainChain(const std::vector<PairedElements>& sortedPairs);
+	std::deque<int> buildDequeMainChain(const std::deque<PairedElements>& sortedPairs);
+
+	std::vector<int> buildVectorPendingElements(const std::vector<PairedElements>& sortedPairs,
+										bool hasStraggler, int stragglerValue);
+	std::deque<int> buildDequePendingElements(const std::deque<PairedElements>& sortedPairs,
+										bool hasStraggler, int stragglerValue);
+
+	size_t findVectorInsertPosition(const std::vector<int>& sortedChain, int value, size_t endIndex) const;
+	size_t findDequeInsertPosition(const std::deque<int>& sortedChain, int value, size_t endIndex) const;
+
+	void insertVectorPendingElements(std::vector<int>& mainChain, const std::vector<int>& pendingElements);
+	void insertDequePendingElements(std::deque<int>& mainChain, const std::deque<int>& pendingElements);
+
+	void fordJohnsonVector(std::vector<int>& elements);
+	void fordJohnsonDeque(std::deque<int>& elements);
+
+	int parsePositiveIntToken(const std::string& token);
+
+public:
+	PmergeMe();
+	PmergeMe(const PmergeMe& other);
+	PmergeMe& operator=(const PmergeMe& other);
+	~PmergeMe();
+
+	void parseInput(int argc, char** argv);
+	void sort();
+
+	const std::vector<int>& getVector() const;
+	const std::deque<int>& getDeque() const;
+	double getVectorTime() const;
+	double getDequeTime() const;
+
+	class InvalidInputException : public std::exception
+	{
+	public:
+		const char* what() const throw();
+	};
 };
 
 #endif
