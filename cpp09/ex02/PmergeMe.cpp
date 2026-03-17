@@ -6,7 +6,7 @@
 /*   By: ekeller- <ekeller-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/06 18:59:26 by ekeller-          #+#    #+#             */
-/*   Updated: 2026/03/17 17:15:04 by ekeller-         ###   ########.fr       */
+/*   Updated: 2026/03/17 18:33:11 by ekeller-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -146,8 +146,8 @@ std::vector<size_t> PmergeMe::buildInsertionOrder(size_t pairedPendingCount)
     if (pairedPendingCount == 0)
         return order;
 
-    // Total number of pairs that have a "b_i"
-    // b1 is already in mainChain, so pendingElements starts at b2. we add +1
+    // Total number of pairs that have a "small_i"
+    // s1 is already in mainChain, so pendingElements starts at s2. we add +1
 	//to account for all indexes.
     size_t totalPairs = pairedPendingCount + 1;
 
@@ -160,11 +160,11 @@ std::vector<size_t> PmergeMe::buildInsertionOrder(size_t pairedPendingCount)
         size_t start = (currentJacob < totalPairs) ? currentJacob : totalPairs;
 
         // Insert block (previousJacob, start] in descending order
-        // logicalIndex is the pair number i in b_i
+        // logicalIndex is the pair number i in s_i
         for (size_t logicalIndex = start; logicalIndex > previousJacob; --logicalIndex)
         {
-            // Convert b_i to pendingElements index:
-            // pending[0] = b2, so index = i - 2
+            // Convert s_i to pendingElements index:
+            // pending[0] = s2, so index = i - 2
             order.push_back(logicalIndex - 2);
         }
 
