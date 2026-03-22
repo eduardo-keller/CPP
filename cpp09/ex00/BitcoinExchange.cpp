@@ -1,14 +1,14 @@
-/* ************************************************************************** */
+/******************************************************************************/
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   BitcoinExchange.cpp                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ekeller- <ekeller-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ekeller- <ekeller-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/09 16:53:54 by ekeller-          #+#    #+#             */
-/*   Updated: 2026/02/11 17:26:33 by ekeller-         ###   ########.fr       */
+/*   Updated: 2026/03/22 17:16:51 by ekeller-         ###   ########.fr       */
 /*                                                                            */
-/* ************************************************************************** */
+/******************************************************************************/
 
 #include "BitcoinExchange.hpp"
 #include <fstream>
@@ -100,7 +100,14 @@ void BitcoinExchange::parseLine(std::string line) {
         if (amount.empty())
             throw std::runtime_error("Error: bad input => " + line);
         
-        double amountDouble = std::strtod(amount.c_str(), NULL);
+        char* end = NULL;
+        double amountDouble = std::strtod(amount.c_str(), &end);
+        // No numeric content at all (e.g. "", "abc")
+        if (end == amount.c_str())
+            throw std::runtime_error("Error: bad input => " + line);
+        // Extra junk after number (e.g. "12abc", "3.2.1")
+        if (*end != '\0')
+            throw std::runtime_error("Error: bad input => " + line);
         if (amountDouble < 0)
             throw std::runtime_error("Error: not a positive number.");
         if (amountDouble > 1000)
@@ -122,7 +129,8 @@ double BitcoinExchange::getRateForDate(const std::string& date) const
     // lower_bound returns iterator to first key that is >= than 'date'
     std::map<std::string, double>::const_iterator it = _rates.lower_bound(date);
 
-    // Case 1: exact match. lower_bound found a match and key == date
+    // Case 1: exact match. lower_bound found a match and key == date.
+    // it->second is the value of thhe key in the map container.
     if (it != _rates.end() && it->first == date)
         return it->second;
 
